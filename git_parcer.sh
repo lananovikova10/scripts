@@ -1,6 +1,7 @@
+echo " " > output.txt
 url="https://api.github.com/users"
 for i in $(cat list.txt); do
-    content="$(curl -i "$url/$i")"
-#for s in $content:    
-    echo "$content" >> output.txt
+    content="$(curl -s -o /dev/null -w "%{http_code}" "$url/$i")"   
+    echo $i "$content" >> output.txt
 done
+
